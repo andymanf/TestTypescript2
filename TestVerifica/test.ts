@@ -1,72 +1,67 @@
 class Person{
-name:string;
-age:number;
-constructor(nome:string,eta:number){
-this.name=nome;
-this.age=eta;
+   name:string;
+   age:number;
+  constructor(name:string,age:number){
+   this.name=name;
+   this.age=age;
+  }
+  public describe(name:string,age:number):string{
+    let s:string=name+","+age;
+  return s;
+  }
 }
-public describe(nome:string,eta:number):string{
-    let s:string=nome+","+eta;
-return s;
-//oppure console.log(nome+","+eta); imposti il metodo :void e togli il return
-}
-public teach(nome:string,materia:string){
-console.log(nome+" is now teaching "+materia);
-}
-}
-let teacher:Person=new Person("Andrea",19);
-teacher.teach(teacher.name,"matematica");
-
-
 
 class Student extends Person{
-nome:string;
-materie:string[];
-public Ricevere(subject:string){
-this.materie.push(subject);
-}
+    name:string;
+    subjects:string[];
+  public output(subject:string){
+     this.subjects.push(subject);
+  }
 }
 class Teacher extends Person{
-    nome:string;
-    classi:string[];
-    public Ricevere(classe:string){
-    this.classi.push(classe);
-    }
-    }
+    name:string;
+    classes:string[];
+  public out(name:string){
+    this.classes.push(name);
+  }
+  public teach(teacher:Teacher,subject:string){
+    console.log(teacher.name+" is now teaching "+subject);
+  }
+}
 
 
 
 class School{
-   Studenti:Student[];
-   Docenti:Teacher[];
-constructor(docente:Teacher,studente:Student){
-this.Studenti=[studente];
-this.Docenti=[docente];
+   students:Student[] = [];
+   teachers:Teacher[]= [];
+  constructor(student:Student,teacher:Teacher){
+      this.students.push(student);
+      this.teachers.push(teacher);
+  }
+  public print(){
+      for(let i=0;i<this.students.length;i++){
+         console.log(this.students[i]);
+      }
+      for(let i=0;i<this.teachers.length;i++){
+         console.log(this.teachers[i]);
+      }
+  }
+  public addStudent(student:Student){
+      this.students.push(student);
+  } 
+  public addTeacher(teacher:Teacher){
+      this.teachers.push(teacher);
+  }
 }
-public Print(){
-for(let i=0;i<this.Studenti.length;i++){
-    console.log(this.Studenti[i]);
-}
-for(let i=0;i<this.Docenti.length;i++){
-    console.log(this.Docenti[i]);
-}
-}
-public AddStudente(studente:Student){
-    this.Studenti.push(studente);
-}
-public AddDocente(docente:Teacher){
-    this.Docenti.push(docente);
-}
-}
-let StudenteA:Student=new Student("Andrea",19);
-let StudenteB:Student=new Student("Daniele",21);
-let StudenteC:Student=new Student("Lorenzo",29);
-let DocenteA:Teacher=new Teacher("Costantino",38);
-let DocenteB:Teacher=new Teacher("Simone",25);
-let DocenteC:Teacher=new Teacher("Cristiano",47);
-let Scuola:School=new School(DocenteA,StudenteA);
-Scuola.AddDocente(DocenteB);
-Scuola.AddDocente(DocenteC);
-Scuola.AddStudente(StudenteB);
-Scuola.AddStudente(StudenteC);
-Scuola.Print();
+let StudentA:Student=new Student("Andrea",19);
+let StudentB:Student=new Student("Daniele",21);
+let StudentC:Student=new Student("Lorenzo",29);
+let TeacherA:Teacher=new Teacher("Costantino",38);
+let TeacherB:Teacher=new Teacher("Simone",25);
+let TeacherC:Teacher=new Teacher("Cristiano",47);
+let Schools:School=new School(StudentA,TeacherA);
+Schools.addTeacher(TeacherB);
+Schools.addTeacher(TeacherC);
+Schools.addStudent(StudentB);
+Schools.addStudent(StudentC);
+Schools.print();
